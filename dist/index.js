@@ -1,2 +1,2 @@
-var e=require("react");exports.useReducerAsync=function(r,u,c,a){var n=a||c,t=e.useReducer(r,u,a&&c),s=t[1];return[t[0],e.useCallback((function(e){var r=n[e.type];r?r(s)(e):s(e)}),[n])]};
+var e=require("react");exports.useReducerAsync=function(r,u,c,n){var a=n||c,t=e.useReducer(r,u,n&&c),s=t[1];return[t[0],e.useCallback((function(e){var r=(e||{}).type,u=r&&a[r]||null;u?u(s)(e):s(e)}),[a])]};
 //# sourceMappingURL=index.js.map

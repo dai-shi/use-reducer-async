@@ -6,7 +6,7 @@ declare type AsyncFunctions<AsyncAction, Action> = AsyncAction extends {
         type: T;
     } ? (d: Dispatch<Action>) => (a: A) => Promise<void> : never : never;
 } : never : never;
-export declare function useReducerAsync<R extends Reducer<unknown, unknown>, I, AsyncAction>(reducer: R, initializerArg: I, initializer: (arg: I) => ReducerState<R>, asyncFunctions: AsyncFunctions<AsyncAction, ReducerAction<R>>): [ReducerState<R>, Dispatch<AsyncAction | ReducerAction<R>>];
+export declare function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction, OuterAction>(reducer: R, initializerArg: I, initializer: (arg: I) => ReducerState<R>, asyncFunctions: AsyncFunctions<AsyncAction, ReducerAction<R>>): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ? [ReducerState<R>, Dispatch<OuterAction>] : never;
 /**
  * useReducer with async action functions
  * @example
@@ -31,5 +31,5 @@ export declare function useReducerAsync<R extends Reducer<unknown, unknown>, I, 
  * };
  * const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActions);
  */
-export declare function useReducerAsync<R extends Reducer<any, any>, AsyncAction>(reducer: R, initialState: ReducerState<R>, asyncFunctions: AsyncFunctions<AsyncAction, ReducerAction<R>>): [ReducerState<R>, Dispatch<AsyncAction | ReducerAction<R>>];
+export declare function useReducerAsync<R extends Reducer<any, any>, AsyncAction, OuterAction>(reducer: R, initialState: ReducerState<R>, asyncFunctions: AsyncFunctions<AsyncAction, ReducerAction<R>>): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ? [ReducerState<R>, Dispatch<OuterAction>] : never;
 export {};
