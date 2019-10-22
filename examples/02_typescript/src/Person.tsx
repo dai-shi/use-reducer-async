@@ -82,6 +82,7 @@ const Person = () => {
     <div>
       First Name:
       {state.firstName}
+      <div>{state.loading && 'Loading...'}</div>
       <button
         type="button"
         onClick={() => dispatch({ type: 'FETCH_PERSON', id: 2 })}
