@@ -14,7 +14,7 @@ to dispatch.
 
 Known issues:
 - No way to get the current state
-- No aborability (yet)
+- No abortability (yet)
 
 ## Install
 
