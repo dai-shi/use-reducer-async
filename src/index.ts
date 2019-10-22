@@ -1,5 +1,3 @@
-/* eslint @typescript-eslint/no-explicit-any: off */
-
 import {
   useCallback,
   useReducer,
@@ -17,12 +15,13 @@ type AsyncFunctions<AsyncAction, Action> = AsyncAction extends {
     } ? (d: Dispatch<Action>) => (a: A) => Promise<void> : never : never;
 } : never : never;
 
-export function useReducerAsync<R extends Reducer<unknown, unknown>, I, AsyncAction>(
+export function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction, OuterAction>(
   reducer: R,
   initializerArg: I,
   initializer: (arg: I) => ReducerState<R>,
   asyncFunctions: AsyncFunctions<AsyncAction, ReducerAction<R>>,
-): [ReducerState<R>, Dispatch<AsyncAction | ReducerAction<R>>];
+): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ?
+  [ReducerState<R>, Dispatch<OuterAction>] : never;
 
 /**
  * useReducer with async action functions
@@ -48,18 +47,19 @@ export function useReducerAsync<R extends Reducer<unknown, unknown>, I, AsyncAct
  * };
  * const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActions);
  */
-export function useReducerAsync<R extends Reducer<any, any>, AsyncAction>(
+export function useReducerAsync<R extends Reducer<any, any>, AsyncAction, OuterAction>(
   reducer: R,
   initialState: ReducerState<R>,
   asyncFunctions: AsyncFunctions<AsyncAction, ReducerAction<R>>,
-): [ReducerState<R>, Dispatch<AsyncAction | ReducerAction<R>>];
+): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ?
+  [ReducerState<R>, Dispatch<OuterAction>] : never;
 
-export function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction>(
+export function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction, OuterAction>(
   reducer: R,
   initializerArg: I | ReducerState<R>,
   initializer: unknown,
   asyncFunctions?: AsyncFunctions<AsyncAction, ReducerAction<R>>,
-): [ReducerState<R>, Dispatch<AsyncAction | ReducerAction<R>>] {
+): [ReducerState<R>, Dispatch<OuterAction>] {
   const asyncFuncs = asyncFunctions || initializer as AsyncFunctions<AsyncAction, ReducerAction<R>>;
   const [state, rawDispatch] = useReducer(
     reducer,
@@ -67,12 +67,16 @@ export function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction>(
     asyncFunctions && initializer as any,
   );
   const dispatch = useCallback((action: AsyncAction | ReducerAction<R>) => {
-    const asyncFunc = asyncFuncs[(action as any).type] as any;
+    const { type } = (action || {}) as { type?: string };
+    const asyncFunc = (
+      (type && asyncFuncs[type]) || null
+    ) as (typeof action extends AsyncAction ?
+      (d: Dispatch<ReducerAction<R>>) => (a: typeof action) => Promise<void> : null);
     if (asyncFunc) {
       asyncFunc(rawDispatch)(action as AsyncAction);
     } else {
       rawDispatch(action as ReducerAction<R>);
     }
   }, [asyncFuncs]);
-  return [state, dispatch];
+  return [state, dispatch] as [ReducerState<R>, Dispatch<OuterAction>];
 }

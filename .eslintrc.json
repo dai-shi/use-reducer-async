@@ -27,7 +27,7 @@
     "react/jsx-one-expression-per-line": "off",
     "import/no-unresolved": ["error", { "ignore": ["use-reducer-async"] }],
     "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
-    "symbol-description": "off"
+    "@typescript-eslint/no-explicit-any": "off"
   },
   "overrides": [{
     "files": ["__tests__/**/*"],

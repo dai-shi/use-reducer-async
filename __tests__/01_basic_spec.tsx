@@ -42,7 +42,11 @@ describe('basic spec', () => {
       },
     };
     const Component = () => {
-      const [state, dispatch] = useReducerAsync<Reducer<State, Action>, AsyncAction>(
+      const [state, dispatch] = useReducerAsync<
+        Reducer<State, Action>,
+        AsyncAction,
+        AsyncAction | Action
+      >(
         reducer,
         initialState,
         asyncActions,

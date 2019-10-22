@@ -5,17 +5,23 @@ import { useReducerAsync } from 'use-reducer-async';
 type State = {
   firstName: string;
   loading: boolean;
+  count: number;
 };
 
 const initialState: State = {
   firstName: '',
   loading: false,
+  count: 0,
 };
 
-type Action =
+type LocalAction =
   | { type: 'START_FETCH' }
   | { type: 'FINISH_FETCH'; firstName: string }
   | { type: 'ERROR_FETCH' };
+
+type ExportAction = { type: 'INCREMENT' };
+
+type Action = LocalAction | ExportAction;
 
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
@@ -34,6 +40,11 @@ const reducer: Reducer<State, Action> = (state, action) => {
       return {
         ...state,
         loading: false,
+      };
+    case 'INCREMENT':
+      return {
+        ...state,
+        count: state.count + 1,
       };
     default:
       throw new Error('unknown action type');
@@ -58,7 +69,11 @@ const asyncActions = {
 };
 
 const Person = () => {
-  const [state, dispatch] = useReducerAsync<Reducer<State, Action>, AsyncAction>(
+  const [state, dispatch] = useReducerAsync<
+    Reducer<State, Action>,
+    AsyncAction,
+    AsyncAction | ExportAction
+  >(
     reducer,
     initialState,
     asyncActions,
