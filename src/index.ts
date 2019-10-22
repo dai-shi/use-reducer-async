@@ -7,7 +7,7 @@ import {
   ReducerAction,
 } from 'react';
 
-type AsyncFunctions<AsyncAction, Action> = AsyncAction extends {
+type AsyncFunctions<AsyncAction extends { type: string }, Action> = AsyncAction extends {
     type: infer Types;
 } ? Types extends string ? {
     [T in Types]: AsyncAction extends infer A ? A extends {
@@ -15,7 +15,12 @@ type AsyncFunctions<AsyncAction, Action> = AsyncAction extends {
     } ? (d: Dispatch<Action>) => (a: A) => Promise<void> : never : never;
 } : never : never;
 
-export function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction, OuterAction>(
+export function useReducerAsync<
+  R extends Reducer<any, any>,
+  I,
+  AsyncAction extends { type: string },
+  OuterAction
+>(
   reducer: R,
   initializerArg: I,
   initializer: (arg: I) => ReducerState<R>,
@@ -47,14 +52,23 @@ export function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction, Out
  * };
  * const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActions);
  */
-export function useReducerAsync<R extends Reducer<any, any>, AsyncAction, OuterAction>(
+export function useReducerAsync<
+  R extends Reducer<any, any>,
+  AsyncAction extends { type: string },
+  OuterAction
+>(
   reducer: R,
   initialState: ReducerState<R>,
   asyncFunctions: AsyncFunctions<AsyncAction, ReducerAction<R>>,
 ): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ?
   [ReducerState<R>, Dispatch<OuterAction>] : never;
 
-export function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction, OuterAction>(
+export function useReducerAsync<
+  R extends Reducer<any, any>,
+  I,
+  AsyncAction extends { type: string },
+  OuterAction
+>(
   reducer: R,
   initializerArg: I | ReducerState<R>,
   initializer: unknown,
