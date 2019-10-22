@@ -1,0 +1,2 @@
+!function(e,n){"object"==typeof exports&&"undefined"!=typeof module?n(exports,require("react")):"function"==typeof define&&define.amd?define(["exports","react"],n):n((e=e||self).useReducerAsync={},e.react)}(this,(function(e,n){e.useReducerAsync=function(e,t,u,c){var r=c||u,f=n.useReducer(e,t,c&&u),o=f[1];return[f[0],n.useCallback((function(e){var n=r[e.type];n?n(o)(e):o(e)}),[r])]}}));
+//# sourceMappingURL=index.umd.js.map

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic spec sleep 1`] = `
+<div>
+  <div>
+    <span>
+      Idle
+    </span>
+    <button
+      type="button"
+    >
+      Click
+    </button>
+  </div>
+</div>
+`;
+
+exports[`basic spec sleep 2`] = `
+<div>
+  <div>
+    <span>
+      Sleeping
+    </span>
+    <button
+      type="button"
+    >
+      Click
+    </button>
+  </div>
+</div>
+`;
+
+exports[`basic spec sleep 3`] = `
+<div>
+  <div>
+    <span>
+      Idle
+    </span>
+    <button
+      type="button"
+    >
+      Click
+    </button>
+  </div>
+</div>
+`;
