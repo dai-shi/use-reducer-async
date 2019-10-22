@@ -15,6 +15,7 @@ This is a tiny library to extend useReducer's dispatch
 so that dispathing async actions invoke async functions.
 
 Known issues:
+
 - No way to get the current state
 - No abortability (yet)
 
@@ -39,7 +40,7 @@ const reducer = (state, action) => {
   }
 };
 
-const asyncActions = {
+const asyncFunctions = {
   SLEEP: dispatch => async (action) => {
     dispatch({ type: 'START_SLEEP' });
     await new Promise(r => setTimeout(r, action.ms));
@@ -48,7 +49,7 @@ const asyncActions = {
 };
 
 const Component = () => {
-  const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActions);
+  const [state, dispatch] = useReducerAsync(reducer, initialState, asyncFunctions);
   return (
     <div>
       <span>{state.sleeping ? 'Sleeping' : 'Idle'}</span>
@@ -64,20 +65,20 @@ const Component = () => {
 
 ### useReducerAsync
 
-useReducer with async action functions
+useReducer with async actions
 
 #### Parameters
 
 - `reducer` **R** 
 - `initialState` **ReducerState&lt;R>** 
-- `asyncFunctions` **AsyncFunctions&lt;AsyncAction, ReducerAction&lt;R>>** 
+- `asyncActionHandlers` **AsyncActionHandlers&lt;AsyncAction, ReducerAction&lt;R>>** 
 
 #### Examples
 
 ```javascript
 import { useReducerAsync } from 'use-reducer-async';
 
-const asyncActions = {
+const asyncActionHandlers = {
   SLEEP: dispatch => async (action) => {
     dispatch({ type: 'START_SLEEP' });
     await new Promise(r => setTimeout(r, action.ms));
@@ -94,10 +95,10 @@ const asyncActions = {
     }
   },
 };
-const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActions);
+const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActionHandlers);
 ```
 
-Returns **\[ReducerState&lt;R>, Dispatch&lt;(AsyncAction | ReducerAction&lt;R>)>]** 
+Returns **any** 
 
 ## Examples
 

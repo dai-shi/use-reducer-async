@@ -1,10 +1,12 @@
 # Change Log
 
 ## [Unreleased]
+### Changed
+- Better typing and better type inference in examples
 
 ## [0.2.0] - 2019-10-22
 ### Changed
-- Better typeing and checking type property existence
+- Better typing and checking type property existence
 
 ## [0.1.0] - 2019-10-22
 ### Added

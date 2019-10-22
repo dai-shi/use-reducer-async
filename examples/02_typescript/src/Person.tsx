@@ -1,6 +1,6 @@
-import React, { Reducer, Dispatch } from 'react';
+import React, { Reducer } from 'react';
 
-import { useReducerAsync } from 'use-reducer-async';
+import { useReducerAsync, AsyncActionHandlers } from 'use-reducer-async';
 
 type State = {
   firstName: string;
@@ -53,8 +53,8 @@ const reducer: Reducer<State, Action> = (state, action) => {
 
 type AsyncAction = { type: 'FETCH_PERSON'; id: number }
 
-const asyncActions = {
-  FETCH_PERSON: (dispatch: Dispatch<Action>) => async (action: AsyncAction) => {
+const asyncActionHandlers: AsyncActionHandlers<AsyncAction, Action> = {
+  FETCH_PERSON: dispatch => async (action) => {
     dispatch({ type: 'START_FETCH' });
     try {
       const response = await fetch(`https://reqres.in/api/users/${action.id}?delay=1`);
@@ -76,7 +76,7 @@ const Person = () => {
   >(
     reducer,
     initialState,
-    asyncActions,
+    asyncActionHandlers,
   );
   return (
     <div>

@@ -1,5 +1,5 @@
 import { Dispatch, Reducer, ReducerState, ReducerAction } from 'react';
-declare type AsyncFunctions<AsyncAction extends {
+export declare type AsyncActionHandlers<AsyncAction extends {
     type: string;
 }, Action> = AsyncAction extends {
     type: infer Types;
@@ -10,13 +10,13 @@ declare type AsyncFunctions<AsyncAction extends {
 } : never : never;
 export declare function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction extends {
     type: string;
-}, OuterAction>(reducer: R, initializerArg: I, initializer: (arg: I) => ReducerState<R>, asyncFunctions: AsyncFunctions<AsyncAction, ReducerAction<R>>): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ? [ReducerState<R>, Dispatch<OuterAction>] : never;
+}, OuterAction>(reducer: R, initializerArg: I, initializer: (arg: I) => ReducerState<R>, asyncActionHandlers: AsyncActionHandlers<AsyncAction, ReducerAction<R>>): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ? [ReducerState<R>, Dispatch<OuterAction>] : never;
 /**
- * useReducer with async action functions
+ * useReducer with async actions
  * @example
  * import { useReducerAsync } from 'use-reducer-async';
  *
- * const asyncActions = {
+ * const asyncActionHandlers = {
  *   SLEEP: dispatch => async (action) => {
  *     dispatch({ type: 'START_SLEEP' });
  *     await new Promise(r => setTimeout(r, action.ms));
@@ -33,9 +33,8 @@ export declare function useReducerAsync<R extends Reducer<any, any>, I, AsyncAct
  *     }
  *   },
  * };
- * const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActions);
+ * const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActionHandlers);
  */
 export declare function useReducerAsync<R extends Reducer<any, any>, AsyncAction extends {
     type: string;
-}, OuterAction>(reducer: R, initialState: ReducerState<R>, asyncFunctions: AsyncFunctions<AsyncAction, ReducerAction<R>>): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ? [ReducerState<R>, Dispatch<OuterAction>] : never;
-export {};
+}, OuterAction>(reducer: R, initialState: ReducerState<R>, asyncActionHandlers: AsyncActionHandlers<AsyncAction, ReducerAction<R>>): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ? [ReducerState<R>, Dispatch<OuterAction>] : never;

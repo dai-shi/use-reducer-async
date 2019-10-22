@@ -1,7 +1,6 @@
 import React, {
   StrictMode,
   Reducer,
-  Dispatch,
 } from 'react';
 
 import {
@@ -11,7 +10,7 @@ import {
   waitForElement,
 } from '@testing-library/react';
 
-import { useReducerAsync } from 'use-reducer-async';
+import { useReducerAsync, AsyncActionHandlers } from 'use-reducer-async';
 
 describe('basic spec', () => {
   afterEach(cleanup);
@@ -34,8 +33,8 @@ describe('basic spec', () => {
       }
     };
     type AsyncAction = { type: 'SLEEP'; ms: number };
-    const asyncActions = {
-      SLEEP: (dispatch: Dispatch<Action>) => async (action: AsyncAction) => {
+    const asyncActionHandlers: AsyncActionHandlers<AsyncAction, Action> = {
+      SLEEP: dispatch => async (action) => {
         dispatch({ type: 'START_SLEEP' });
         await new Promise(r => setTimeout(r, action.ms));
         dispatch({ type: 'END_SLEEP' });
@@ -49,7 +48,7 @@ describe('basic spec', () => {
       >(
         reducer,
         initialState,
-        asyncActions,
+        asyncActionHandlers,
       );
       return (
         <div>

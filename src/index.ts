@@ -7,7 +7,10 @@ import {
   ReducerAction,
 } from 'react';
 
-type AsyncFunctions<AsyncAction extends { type: string }, Action> = AsyncAction extends {
+export type AsyncActionHandlers<
+  AsyncAction extends { type: string },
+  Action
+> = AsyncAction extends {
     type: infer Types;
 } ? Types extends string ? {
     [T in Types]: AsyncAction extends infer A ? A extends {
@@ -24,16 +27,16 @@ export function useReducerAsync<
   reducer: R,
   initializerArg: I,
   initializer: (arg: I) => ReducerState<R>,
-  asyncFunctions: AsyncFunctions<AsyncAction, ReducerAction<R>>,
+  asyncActionHandlers: AsyncActionHandlers<AsyncAction, ReducerAction<R>>,
 ): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ?
   [ReducerState<R>, Dispatch<OuterAction>] : never;
 
 /**
- * useReducer with async action functions
+ * useReducer with async actions
  * @example
  * import { useReducerAsync } from 'use-reducer-async';
  *
- * const asyncActions = {
+ * const asyncActionHandlers = {
  *   SLEEP: dispatch => async (action) => {
  *     dispatch({ type: 'START_SLEEP' });
  *     await new Promise(r => setTimeout(r, action.ms));
@@ -50,7 +53,7 @@ export function useReducerAsync<
  *     }
  *   },
  * };
- * const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActions);
+ * const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActionHandlers);
  */
 export function useReducerAsync<
   R extends Reducer<any, any>,
@@ -59,7 +62,7 @@ export function useReducerAsync<
 >(
   reducer: R,
   initialState: ReducerState<R>,
-  asyncFunctions: AsyncFunctions<AsyncAction, ReducerAction<R>>,
+  asyncActionHandlers: AsyncActionHandlers<AsyncAction, ReducerAction<R>>,
 ): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ?
   [ReducerState<R>, Dispatch<OuterAction>] : never;
 
@@ -72,25 +75,27 @@ export function useReducerAsync<
   reducer: R,
   initializerArg: I | ReducerState<R>,
   initializer: unknown,
-  asyncFunctions?: AsyncFunctions<AsyncAction, ReducerAction<R>>,
+  asyncActionHandlers?: AsyncActionHandlers<AsyncAction, ReducerAction<R>>,
 ): [ReducerState<R>, Dispatch<OuterAction>] {
-  const asyncFuncs = asyncFunctions || initializer as AsyncFunctions<AsyncAction, ReducerAction<R>>;
+  const aaHandlers = (
+    asyncActionHandlers || initializer
+  ) as AsyncActionHandlers<AsyncAction, ReducerAction<R>>;
   const [state, rawDispatch] = useReducer(
     reducer,
     initializerArg as any,
-    asyncFunctions && initializer as any,
+    asyncActionHandlers && initializer as any,
   );
   const dispatch = useCallback((action: AsyncAction | ReducerAction<R>) => {
     const { type } = (action || {}) as { type?: string };
-    const asyncFunc = (
-      (type && asyncFuncs[type]) || null
+    const aaHandler = (
+      (type && aaHandlers[type]) || null
     ) as (typeof action extends AsyncAction ?
       (d: Dispatch<ReducerAction<R>>) => (a: typeof action) => Promise<void> : null);
-    if (asyncFunc) {
-      asyncFunc(rawDispatch)(action as AsyncAction);
+    if (aaHandler) {
+      aaHandler(rawDispatch)(action as AsyncAction);
     } else {
       rawDispatch(action as ReducerAction<R>);
     }
-  }, [asyncFuncs]);
+  }, [aaHandlers]);
   return [state, dispatch] as [ReducerState<R>, Dispatch<OuterAction>];
 }
