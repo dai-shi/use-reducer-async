@@ -22,14 +22,13 @@ export function useReducerAsync<
   R extends Reducer<any, any>,
   I,
   AsyncAction extends { type: string },
-  OuterAction
+  OuterAction extends AsyncAction | ReducerAction<R>
 >(
   reducer: R,
   initializerArg: I,
   initializer: (arg: I) => ReducerState<R>,
   asyncActionHandlers: AsyncActionHandlers<AsyncAction, ReducerAction<R>>,
-): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ?
-  [ReducerState<R>, Dispatch<OuterAction>] : never;
+): [ReducerState<R>, Dispatch<OuterAction>];
 
 /**
  * useReducer with async actions
@@ -58,19 +57,18 @@ export function useReducerAsync<
 export function useReducerAsync<
   R extends Reducer<any, any>,
   AsyncAction extends { type: string },
-  OuterAction
+  OuterAction extends AsyncAction | ReducerAction<R>
 >(
   reducer: R,
   initialState: ReducerState<R>,
   asyncActionHandlers: AsyncActionHandlers<AsyncAction, ReducerAction<R>>,
-): Exclude<OuterAction, AsyncAction | ReducerAction<R>> extends never ?
-  [ReducerState<R>, Dispatch<OuterAction>] : never;
+): [ReducerState<R>, Dispatch<OuterAction>];
 
 export function useReducerAsync<
   R extends Reducer<any, any>,
   I,
   AsyncAction extends { type: string },
-  OuterAction
+  OuterAction extends AsyncAction | ReducerAction<R>
 >(
   reducer: R,
   initializerArg: I | ReducerState<R>,
@@ -97,5 +95,5 @@ export function useReducerAsync<
       rawDispatch(action as ReducerAction<R>);
     }
   }, [aaHandlers]);
-  return [state, dispatch] as [ReducerState<R>, Dispatch<OuterAction>];
+  return [state, dispatch];
 }
