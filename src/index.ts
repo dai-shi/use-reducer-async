@@ -10,12 +10,10 @@ import {
 export type AsyncActionHandlers<
   AsyncAction extends { type: string },
   Action
-> = AsyncAction extends {
-    type: infer Types;
-} ? Types extends string ? {
-    [T in Types]: AsyncAction extends infer A ? A extends {
-        type: T;
-    } ? (d: Dispatch<Action>) => (a: A) => Promise<void> : never : never;
+> = AsyncAction extends { type: infer Type } ? Type extends string ? {
+  [T in Type]: AsyncAction extends infer A ? A extends {
+    type: T;
+  } ? (d: Dispatch<Action>) => (a: A) => Promise<void> : never : never;
 } : never : never;
 
 export function useReducerAsync<
