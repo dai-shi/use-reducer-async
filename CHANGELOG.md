@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [0.3.0] - 2019-10-24
 ### Changed
 - Better typing and better type inference in examples
 
