@@ -40,7 +40,7 @@ const reducer = (state, action) => {
   }
 };
 
-const asyncFunctions = {
+const asyncActionHandlers = {
   SLEEP: dispatch => async (action) => {
     dispatch({ type: 'START_SLEEP' });
     await new Promise(r => setTimeout(r, action.ms));
@@ -49,7 +49,7 @@ const asyncFunctions = {
 };
 
 const Component = () => {
-  const [state, dispatch] = useReducerAsync(reducer, initialState, asyncFunctions);
+  const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActionHandlers);
   return (
     <div>
       <span>{state.sleeping ? 'Sleeping' : 'Idle'}</span>
@@ -98,7 +98,7 @@ const asyncActionHandlers = {
 const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActionHandlers);
 ```
 
-Returns **any** 
+Returns **\[ReducerState&lt;R>, Dispatch&lt;OuterAction>]** 
 
 ## Examples
 
