@@ -10,11 +10,11 @@ import {
 export type AsyncActionHandlers<
   AsyncAction extends { type: string },
   Action
-> = AsyncAction extends { type: infer Type } ? Type extends string ? {
-  [T in Type]: AsyncAction extends infer A ? A extends {
+> = {
+  [T in AsyncAction['type']]: AsyncAction extends infer A ? A extends {
     type: T;
   } ? (d: Dispatch<Action>) => (a: A) => Promise<void> : never : never;
-} : never : never;
+};
 
 export function useReducerAsync<
   R extends Reducer<any, any>,
@@ -82,7 +82,7 @@ export function useReducerAsync<
     asyncActionHandlers && initializer as any,
   );
   const dispatch = useCallback((action: AsyncAction | ReducerAction<R>) => {
-    const { type } = (action || {}) as { type?: string };
+    const { type } = (action || {}) as { type?: AsyncAction['type'] };
     const aaHandler = (
       (type && aaHandlers[type]) || null
     ) as (typeof action extends AsyncAction ?
