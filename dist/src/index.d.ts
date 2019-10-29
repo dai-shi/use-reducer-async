@@ -1,13 +1,11 @@
 import { Dispatch, Reducer, ReducerState, ReducerAction } from 'react';
 export declare type AsyncActionHandlers<AsyncAction extends {
     type: string;
-}, Action> = AsyncAction extends {
-    type: infer Types;
-} ? Types extends string ? {
-    [T in Types]: AsyncAction extends infer A ? A extends {
+}, Action> = {
+    [T in AsyncAction['type']]: AsyncAction extends infer A ? A extends {
         type: T;
     } ? (d: Dispatch<Action>) => (a: A) => Promise<void> : never : never;
-} : never : never;
+};
 export declare function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction extends {
     type: string;
 }, OuterAction extends AsyncAction | ReducerAction<R>>(reducer: R, initializerArg: I, initializer: (arg: I) => ReducerState<R>, asyncActionHandlers: AsyncActionHandlers<AsyncAction, ReducerAction<R>>): [ReducerState<R>, Dispatch<OuterAction>];
