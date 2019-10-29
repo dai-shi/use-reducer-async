@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [0.4.0] - 2019-10-29
 ### Changed
 - Improve and simplity typing
 
