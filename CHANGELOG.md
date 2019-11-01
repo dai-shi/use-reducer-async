@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [0.5.0] - 2019-11-01
 ### Changed
 - Support getState
 - Improve typings (breaking change)
