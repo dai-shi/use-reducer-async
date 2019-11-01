@@ -42,12 +42,12 @@ export function useReducerAsync<
  * import { useReducerAsync } from 'use-reducer-async';
  *
  * const asyncActionHandlers = {
- *   SLEEP: dispatch => async (action) => {
+ *   SLEEP: (dispatch, getState) => async (action) => {
  *     dispatch({ type: 'START_SLEEP' });
  *     await new Promise(r => setTimeout(r, action.ms));
  *     dispatch({ type: 'END_SLEEP' });
  *   },
- *   FETCH: dispatch => async (action) => {
+ *   FETCH: (dispatch, getState) => async (action) => {
  *     dispatch({ type: 'START_FETCH' });
  *     try {
  *       const response = await fetch(action.url);
