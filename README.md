@@ -16,7 +16,6 @@ so that dispathing async actions invoke async functions.
 
 Known issues:
 
-- No way to get the current state
 - No abortability (yet)
 
 ## Install
@@ -41,7 +40,7 @@ const reducer = (state, action) => {
 };
 
 const asyncActionHandlers = {
-  SLEEP: dispatch => async (action) => {
+  SLEEP: (dispatch, getState) => async (action) => {
     dispatch({ type: 'START_SLEEP' });
     await new Promise(r => setTimeout(r, action.ms));
     dispatch({ type: 'END_SLEEP' });
@@ -71,7 +70,7 @@ useReducer with async actions
 
 - `reducer` **R** 
 - `initialState` **ReducerState&lt;R>** 
-- `asyncActionHandlers` **AsyncActionHandlers&lt;AsyncAction, ReducerAction&lt;R>>** 
+- `asyncActionHandlers` **AsyncActionHandlers&lt;R, AsyncAction>** 
 
 #### Examples
 
@@ -114,3 +113,4 @@ and open <http://localhost:8080> in your web browser.
 You can also try them in codesandbox.io:
 [01](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/01_minimal)
 [02](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/02_typescript)
+[03](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/03_getstate)

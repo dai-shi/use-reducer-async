@@ -1,14 +1,14 @@
 import { Dispatch, Reducer, ReducerState, ReducerAction } from 'react';
-export declare type AsyncActionHandlers<AsyncAction extends {
+export declare type AsyncActionHandlers<R extends Reducer<any, any>, AsyncAction extends {
     type: string;
-}, Action> = {
+}> = {
     [T in AsyncAction['type']]: AsyncAction extends infer A ? A extends {
         type: T;
-    } ? (d: Dispatch<Action>) => (a: A) => Promise<void> : never : never;
+    } ? (d: Dispatch<ReducerAction<R>>, getState: () => ReducerState<R>) => (a: A) => Promise<void> : never : never;
 };
 export declare function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction extends {
     type: string;
-}, OuterAction extends AsyncAction | ReducerAction<R>>(reducer: R, initializerArg: I, initializer: (arg: I) => ReducerState<R>, asyncActionHandlers: AsyncActionHandlers<AsyncAction, ReducerAction<R>>): [ReducerState<R>, Dispatch<OuterAction>];
+}, OuterAction extends AsyncAction | ReducerAction<R>>(reducer: R, initializerArg: I, initializer: (arg: I) => ReducerState<R>, asyncActionHandlers: AsyncActionHandlers<R, AsyncAction>): [ReducerState<R>, Dispatch<OuterAction>];
 /**
  * useReducer with async actions
  * @example
@@ -35,4 +35,4 @@ export declare function useReducerAsync<R extends Reducer<any, any>, I, AsyncAct
  */
 export declare function useReducerAsync<R extends Reducer<any, any>, AsyncAction extends {
     type: string;
-}, OuterAction extends AsyncAction | ReducerAction<R>>(reducer: R, initialState: ReducerState<R>, asyncActionHandlers: AsyncActionHandlers<AsyncAction, ReducerAction<R>>): [ReducerState<R>, Dispatch<OuterAction>];
+}, OuterAction extends AsyncAction | ReducerAction<R>>(reducer: R, initialState: ReducerState<R>, asyncActionHandlers: AsyncActionHandlers<R, AsyncAction>): [ReducerState<R>, Dispatch<OuterAction>];

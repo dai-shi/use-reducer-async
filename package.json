@@ -24,7 +24,8 @@
     "tsc-test": "tsc --project . --noEmit",
     "apidoc": "documentation build --format md --markdown-toc false --parse-extension ts src/*.ts | add-text-to-markdown README.md --section API --write",
     "examples:minimal": "DIR=01_minimal EXT=js webpack-dev-server",
-    "examples:typescript": "DIR=02_typescript webpack-dev-server"
+    "examples:typescript": "DIR=02_typescript webpack-dev-server",
+    "examples:getstate": "DIR=03_getstate webpack-dev-server"
   },
   "keywords": [
     "react",

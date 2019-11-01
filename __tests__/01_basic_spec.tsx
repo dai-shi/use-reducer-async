@@ -33,7 +33,7 @@ describe('basic spec', () => {
       }
     };
     type AsyncAction = { type: 'SLEEP'; ms: number };
-    const asyncActionHandlers: AsyncActionHandlers<AsyncAction, Action> = {
+    const asyncActionHandlers: AsyncActionHandlers<Reducer<State, Action>, AsyncAction> = {
       SLEEP: dispatch => async (action) => {
         dispatch({ type: 'START_SLEEP' });
         await new Promise(r => setTimeout(r, action.ms));

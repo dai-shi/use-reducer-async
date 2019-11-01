@@ -1,2 +1,2 @@
-import{useReducer as r,useCallback as t}from"react";function n(n,o,e,u){var a=u||e,c=r(n,o,u&&e),f=c[1];return[c[0],t((function(r){var t=(r||{}).type,n=t&&a[t]||null;n?n(f)(r):f(r)}),[a])]}export{n as useReducerAsync};
+import{useReducer as n,useRef as r,useCallback as t,useLayoutEffect as e,useEffect as u}from"react";var o="undefined"!=typeof window?e:u;function c(e,u,c,f){var i=f||c,a=n(e,u,f&&c),p=a[0],v=a[1],d=r(p);o((function(){d.current=p}),[p]);var l=t((function(){return d.current}),[]),m=t((function(n){var r=(n||{}).type,t=r&&i[r]||null;t?t(v,l)(n):v(n)}),[i,l]);return[p,m]}export{c as useReducerAsync};
 //# sourceMappingURL=index.esm.js.map

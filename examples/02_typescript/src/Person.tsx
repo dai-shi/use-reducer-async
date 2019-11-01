@@ -53,7 +53,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
 
 type AsyncAction = { type: 'FETCH_PERSON'; id: number }
 
-const asyncActionHandlers: AsyncActionHandlers<AsyncAction, Action> = {
+const asyncActionHandlers: AsyncActionHandlers<Reducer<State, Action>, AsyncAction> = {
   FETCH_PERSON: dispatch => async (action) => {
     dispatch({ type: 'START_FETCH' });
     try {
