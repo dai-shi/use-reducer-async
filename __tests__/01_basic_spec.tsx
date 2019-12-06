@@ -10,7 +10,7 @@ import {
   waitForElement,
 } from '@testing-library/react';
 
-import { useReducerAsync, AsyncActionHandlers } from 'use-reducer-async';
+import { useReducerAsync, AsyncActionHandlers } from '../src/index';
 
 describe('basic spec', () => {
   afterEach(cleanup);
