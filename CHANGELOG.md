@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [0.6.0] - 2020-01-18
 ### Changed
 - Make ExportAction type omittable
 
