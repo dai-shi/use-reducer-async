@@ -4,23 +4,23 @@ export declare type AsyncActionHandlers<R extends Reducer<any, any>, AsyncAction
 }> = {
     [T in AsyncAction['type']]: AsyncAction extends infer A ? A extends {
         type: T;
-    } ? (d: Dispatch<ReducerAction<R>>, getState: () => ReducerState<R>) => (a: A) => Promise<void> : never : never;
+    } ? (dispatch: Dispatch<ReducerAction<R>>, getState: () => ReducerState<R>) => (a: A) => Promise<void> : never : never;
 };
 export declare function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction extends {
     type: string;
-}, OuterAction extends AsyncAction | ReducerAction<R>>(reducer: R, initializerArg: I, initializer: (arg: I) => ReducerState<R>, asyncActionHandlers: AsyncActionHandlers<R, AsyncAction>): [ReducerState<R>, Dispatch<OuterAction>];
+}, ExportAction extends AsyncAction | ReducerAction<R> = AsyncAction | ReducerAction<R>>(reducer: R, initializerArg: I, initializer: (arg: I) => ReducerState<R>, asyncActionHandlers: AsyncActionHandlers<R, AsyncAction>): [ReducerState<R>, Dispatch<ExportAction>];
 /**
  * useReducer with async actions
  * @example
  * import { useReducerAsync } from 'use-reducer-async';
  *
  * const asyncActionHandlers = {
- *   SLEEP: dispatch => async (action) => {
+ *   SLEEP: (dispatch, getState) => async (action) => {
  *     dispatch({ type: 'START_SLEEP' });
  *     await new Promise(r => setTimeout(r, action.ms));
  *     dispatch({ type: 'END_SLEEP' });
  *   },
- *   FETCH: dispatch => async (action) => {
+ *   FETCH: (dispatch, getState) => async (action) => {
  *     dispatch({ type: 'START_FETCH' });
  *     try {
  *       const response = await fetch(action.url);
@@ -35,4 +35,4 @@ export declare function useReducerAsync<R extends Reducer<any, any>, I, AsyncAct
  */
 export declare function useReducerAsync<R extends Reducer<any, any>, AsyncAction extends {
     type: string;
-}, OuterAction extends AsyncAction | ReducerAction<R>>(reducer: R, initialState: ReducerState<R>, asyncActionHandlers: AsyncActionHandlers<R, AsyncAction>): [ReducerState<R>, Dispatch<OuterAction>];
+}, ExportAction extends AsyncAction | ReducerAction<R> = AsyncAction | ReducerAction<R>>(reducer: R, initialState: ReducerState<R>, asyncActionHandlers: AsyncActionHandlers<R, AsyncAction>): [ReducerState<R>, Dispatch<ExportAction>];
