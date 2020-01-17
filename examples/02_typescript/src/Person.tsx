@@ -14,14 +14,14 @@ const initialState: State = {
   count: 0,
 };
 
-type LocalAction =
+type InnerAction =
   | { type: 'START_FETCH' }
   | { type: 'FINISH_FETCH'; firstName: string }
   | { type: 'ERROR_FETCH' };
 
-type ExportAction = { type: 'INCREMENT' };
+type OuterAction = { type: 'INCREMENT' };
 
-type Action = LocalAction | ExportAction;
+type Action = InnerAction | OuterAction;
 
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
@@ -72,7 +72,7 @@ const Person = () => {
   const [state, dispatch] = useReducerAsync<
     Reducer<State, Action>,
     AsyncAction,
-    AsyncAction | ExportAction
+    AsyncAction | OuterAction
   >(
     reducer,
     initialState,

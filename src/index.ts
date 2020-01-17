@@ -28,13 +28,13 @@ export function useReducerAsync<
   R extends Reducer<any, any>,
   I,
   AsyncAction extends { type: string },
-  OuterAction extends AsyncAction | ReducerAction<R>
+  ExportAction extends AsyncAction | ReducerAction<R> = AsyncAction | ReducerAction<R>
 >(
   reducer: R,
   initializerArg: I,
   initializer: (arg: I) => ReducerState<R>,
   asyncActionHandlers: AsyncActionHandlers<R, AsyncAction>,
-): [ReducerState<R>, Dispatch<OuterAction>];
+): [ReducerState<R>, Dispatch<ExportAction>];
 
 /**
  * useReducer with async actions
@@ -63,24 +63,24 @@ export function useReducerAsync<
 export function useReducerAsync<
   R extends Reducer<any, any>,
   AsyncAction extends { type: string },
-  OuterAction extends AsyncAction | ReducerAction<R>
+  ExportAction extends AsyncAction | ReducerAction<R> = AsyncAction | ReducerAction<R>
 >(
   reducer: R,
   initialState: ReducerState<R>,
   asyncActionHandlers: AsyncActionHandlers<R, AsyncAction>,
-): [ReducerState<R>, Dispatch<OuterAction>];
+): [ReducerState<R>, Dispatch<ExportAction>];
 
 export function useReducerAsync<
   R extends Reducer<any, any>,
   I,
   AsyncAction extends { type: string },
-  OuterAction extends AsyncAction | ReducerAction<R>
+  ExportAction extends AsyncAction | ReducerAction<R> = AsyncAction | ReducerAction<R>
 >(
   reducer: R,
   initializerArg: I | ReducerState<R>,
   initializer: unknown,
   asyncActionHandlers?: AsyncActionHandlers<R, AsyncAction>,
-): [ReducerState<R>, Dispatch<OuterAction>] {
+): [ReducerState<R>, Dispatch<ExportAction>] {
   const aaHandlers = (
     asyncActionHandlers || initializer
   ) as AsyncActionHandlers<R, AsyncAction>;

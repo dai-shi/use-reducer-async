@@ -12,11 +12,11 @@ const initialState: State = {
   count2: 0,
 };
 
-type LocalAction = { type: 'SET_COUNT2'; count2: number };
+type InnerAction = { type: 'SET_COUNT2'; count2: number };
 
-type ExportAction = { type: 'INCREMENT1' };
+type OuterAction = { type: 'INCREMENT1' };
 
-type Action = LocalAction | ExportAction;
+type Action = InnerAction | OuterAction;
 
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
@@ -48,7 +48,7 @@ const DelayedCounter = () => {
   const [state, dispatch] = useReducerAsync<
     Reducer<State, Action>,
     AsyncAction,
-    AsyncAction | ExportAction
+    AsyncAction | OuterAction
   >(
     reducer,
     initialState,
