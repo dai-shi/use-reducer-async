@@ -16,7 +16,7 @@ so that dispathing async actions invoke async functions.
 
 Known issues:
 
-- No abortability (yet)
+-   No abortability (yet)
 
 ## Install
 
@@ -68,9 +68,9 @@ useReducer with async actions
 
 #### Parameters
 
-- `reducer` **R** 
-- `initialState` **ReducerState&lt;R>** 
-- `asyncActionHandlers` **AsyncActionHandlers&lt;R, AsyncAction>** 
+-   `reducer` **R** 
+-   `initialState` **ReducerState&lt;R>** 
+-   `asyncActionHandlers` **AsyncActionHandlers&lt;R, AsyncAction>** 
 
 #### Examples
 
@@ -97,7 +97,7 @@ const asyncActionHandlers = {
 const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActionHandlers);
 ```
 
-Returns **\[ReducerState&lt;R>, Dispatch&lt;OuterAction>]** 
+Returns **\[ReducerState&lt;R>, Dispatch&lt;ExportAction>]** 
 
 ## Examples
 
