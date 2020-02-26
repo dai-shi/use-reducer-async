@@ -14,9 +14,9 @@ Unlike Redux, there's no middleware interface, but hooks are composable.
 This is a tiny library to extend useReducer's dispatch
 so that dispathing async actions invoke async functions.
 
-Known issues:
+Limitations:
 
--   No abortability (yet)
+-   No abortability
 
 ## Install
 

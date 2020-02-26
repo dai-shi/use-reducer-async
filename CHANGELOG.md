@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [1.0.0] - 2020-02-26
+### Changed
+- Update only README
+
 ## [0.6.0] - 2020-01-18
 ### Changed
 - Make ExportAction type omittable
