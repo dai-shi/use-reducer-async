@@ -26,7 +26,8 @@
     "apidoc": "documentation readme --section API --markdown-toc false --parse-extension ts src/*.ts",
     "examples:01_minimal": "DIR=01_minimal EXT=js webpack-dev-server",
     "examples:02_typescript": "DIR=02_typescript webpack-dev-server",
-    "examples:03_getstate": "DIR=03_getstate webpack-dev-server"
+    "examples:03_getstate": "DIR=03_getstate webpack-dev-server",
+    "examples:04_abort": "DIR=04_abort webpack-dev-server"
   },
   "keywords": [
     "react",
