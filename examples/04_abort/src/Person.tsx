@@ -56,18 +56,14 @@ type AsyncAction = { type: 'FETCH_PERSON'; id: number }
 const asyncActionHandlers: AsyncActionHandlers<Reducer<State, Action>, AsyncAction> = {
   FETCH_PERSON: (dispatch, _getState, signal) => async (action) => {
     dispatch({ type: 'START_FETCH' });
-    let aborted = false;
-    signal.addEventListener('abort', () => {
-      aborted = true;
-    });
     try {
       const response = await fetch(`https://reqres.in/api/users/${action.id}?delay=1`, { signal });
       const data = await response.json();
       const firstName = data.data.first_name;
       if (typeof firstName !== 'string') throw new Error();
-      if (!aborted) dispatch({ type: 'FINISH_FETCH', firstName });
+      if (!signal.aborted) dispatch({ type: 'FINISH_FETCH', firstName });
     } catch (e) {
-      if (!aborted) dispatch({ type: 'ERROR_FETCH' });
+      if (!signal.aborted) dispatch({ type: 'ERROR_FETCH' });
     }
   },
 };
