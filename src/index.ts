@@ -10,7 +10,14 @@ import {
   ReducerAction,
 } from 'react';
 
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
+const isClient = (
+  typeof window !== 'undefined'
+  && typeof window.navigator !== 'undefined'
+  && typeof window.navigator.userAgent === 'string'
+  && !window.navigator.userAgent.includes('ServerSideRendering')
+);
+
+const useIsomorphicLayoutEffect = isClient ? useLayoutEffect : useEffect;
 
 export type AsyncActionHandlers<
   R extends Reducer<any, any>,

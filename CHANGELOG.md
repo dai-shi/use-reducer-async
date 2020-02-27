@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+### Changed
+- Improve isClient detection for useIsomorphicLayoutEffect
 
 ## [1.0.0] - 2020-02-26
 ### Changed
