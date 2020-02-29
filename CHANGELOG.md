@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [2.0.0] - 2020-02-29
 ### Changed
 - Improve isClient detection for useIsomorphicLayoutEffect
 - Support abortability
