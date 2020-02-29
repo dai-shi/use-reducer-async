@@ -62,7 +62,10 @@ React in the development mode warns about possible memory leaks.
 It is the responsibility of the action handler to deal with such cases.
 
 All action handlers receive `abortSignal` in the third argument.
-Refer `example/04_abort` for the usage.
+Refer [`examples/04_abort/src`](./examples/04_abort/src) for the usage.
+
+Note: The implementation depends on [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) in the DOM spec.
+If you are using an environment that doesn't have AbortController (for example IE11), you need to polyfill it.
 
 ## API
 
