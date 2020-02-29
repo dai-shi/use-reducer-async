@@ -12,9 +12,7 @@ import {
 
 const isClient = (
   typeof window !== 'undefined'
-  && typeof window.navigator !== 'undefined'
-  && typeof window.navigator.userAgent === 'string'
-  && !window.navigator.userAgent.includes('ServerSideRendering')
+  && !/ServerSideRendering/.test(window.navigator && window.navigator.userAgent)
 );
 
 const useIsomorphicLayoutEffect = isClient ? useLayoutEffect : useEffect;
