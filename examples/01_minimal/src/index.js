@@ -16,7 +16,7 @@ const reducer = (state, action) => {
 };
 
 const asyncActions = {
-  SLEEP: (dispatch) => async (action) => {
+  SLEEP: ({ dispatch }) => async (action) => {
     dispatch({ type: 'START_SLEEP' });
     await new Promise((r) => setTimeout(r, action.ms));
     dispatch({ type: 'END_SLEEP' });

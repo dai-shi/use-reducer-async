@@ -38,7 +38,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
 type AsyncAction = { type: 'DELAYED_INCREMENT2' }
 
 const asyncActionHandlers: AsyncActionHandlers<Reducer<State, Action>, AsyncAction> = {
-  DELAYED_INCREMENT2: (dispatch, getState) => async () => {
+  DELAYED_INCREMENT2: ({ dispatch, getState }) => async () => {
     await new Promise((r) => setTimeout(r, 1000));
     dispatch({ type: 'SET_COUNT2', count2: getState().count2 + 1 });
   },

@@ -14,10 +14,6 @@ Unlike Redux, there's no middleware interface, but hooks are composable.
 This is a tiny library to extend useReducer's dispatch
 so that dispathing async actions invoke async functions.
 
-Limitations:
-
--   No abortability
-
 ## Install
 
 ```bash
@@ -40,7 +36,7 @@ const reducer = (state, action) => {
 };
 
 const asyncActionHandlers = {
-  SLEEP: (dispatch, getState) => async (action) => {
+  SLEEP: ({ dispatch }) => async (action) => {
     dispatch({ type: 'START_SLEEP' });
     await new Promise(r => setTimeout(r, action.ms));
     dispatch({ type: 'END_SLEEP' });
@@ -57,6 +53,19 @@ const Component = () => {
   );
 };
 ```
+
+### Notes for abortability
+
+If an async action handler dispatches an action after the component is unmounted,
+React in the development mode warns about possible memory leaks.
+
+It is the responsibility of the async action handler to deal with such cases.
+
+All async action handlers receive `signal` in the argument.
+Refer [`examples/04_abort/src`](./examples/04_abort/src) for the usage.
+
+Note: The implementation depends on [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) in the DOM spec.
+If you are using an environment that doesn't have AbortController (for example IE11), you need to polyfill it.
 
 ## API
 
@@ -78,12 +87,12 @@ useReducer with async actions
 import { useReducerAsync } from 'use-reducer-async';
 
 const asyncActionHandlers = {
-  SLEEP: (dispatch, getState) => async (action) => {
+  SLEEP: (dispatch, getState, abortSignal) => async (action) => {
     dispatch({ type: 'START_SLEEP' });
     await new Promise(r => setTimeout(r, action.ms));
     dispatch({ type: 'END_SLEEP' });
   },
-  FETCH: (dispatch, getState) => async (action) => {
+  FETCH: (dispatch, getState, abortSignal) => async (action) => {
     dispatch({ type: 'START_FETCH' });
     try {
       const response = await fetch(action.url);
@@ -114,3 +123,4 @@ You can also try them in codesandbox.io:
 [01](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/01_minimal)
 [02](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/02_typescript)
 [03](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/03_getstate)
+[04](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/04_abort)

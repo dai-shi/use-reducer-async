@@ -3,6 +3,8 @@
 ## [Unreleased]
 ### Changed
 - Improve isClient detection for useIsomorphicLayoutEffect
+- Support abortability
+- New API for async action handlers [BREAKING CHANGE]
 
 ## [1.0.0] - 2020-02-26
 ### Changed
