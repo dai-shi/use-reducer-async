@@ -65,7 +65,9 @@ All async action handlers receive `signal` in the argument.
 Refer [`examples/04_abort/src`](./examples/04_abort/src) for the usage.
 
 Note: The implementation depends on [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) in the DOM spec.
-If you are using an environment that doesn't have AbortController (for example IE11), you need to polyfill it.
+If you are using an environment that doesn't have AbortController (for example IE11), you need a polyfill:
+[1](https://github.com/mo/abortcontroller-polyfill)
+[2](https://github.com/mysticatea/abort-controller)
 
 ## API
 
