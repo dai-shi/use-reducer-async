@@ -26,7 +26,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
 type AsyncAction = { type: 'SLEEP'; ms: number }
 
 const asyncActionHandlers: AsyncActionHandlers<Reducer<State, Action>, AsyncAction> = {
-  SLEEP: (dispatch, _getState, signal) => async (action) => {
+  SLEEP: ({ dispatch, signal }) => async (action) => {
     dispatch({ type: 'START_SLEEP' });
     const timer = setTimeout(() => {
       dispatch({ type: 'END_SLEEP' });

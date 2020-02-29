@@ -36,7 +36,7 @@ const reducer = (state, action) => {
 };
 
 const asyncActionHandlers = {
-  SLEEP: (dispatch, getState) => async (action) => {
+  SLEEP: ({ dispatch }) => async (action) => {
     dispatch({ type: 'START_SLEEP' });
     await new Promise(r => setTimeout(r, action.ms));
     dispatch({ type: 'END_SLEEP' });
@@ -56,12 +56,12 @@ const Component = () => {
 
 ### Notes for abortability
 
-If an action handler dispatches an action after the component is unmounted,
+If an async action handler dispatches an action after the component is unmounted,
 React in the development mode warns about possible memory leaks.
 
-It is the responsibility of the action handler to deal with such cases.
+It is the responsibility of the async action handler to deal with such cases.
 
-All action handlers receive `abortSignal` in the third argument.
+All async action handlers receive `signal` in the argument.
 Refer [`examples/04_abort/src`](./examples/04_abort/src) for the usage.
 
 Note: The implementation depends on [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) in the DOM spec.

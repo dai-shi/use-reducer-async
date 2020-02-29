@@ -54,7 +54,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
 type AsyncAction = { type: 'FETCH_PERSON'; id: number }
 
 const asyncActionHandlers: AsyncActionHandlers<Reducer<State, Action>, AsyncAction> = {
-  FETCH_PERSON: (dispatch) => async (action) => {
+  FETCH_PERSON: ({ dispatch }) => async (action) => {
     dispatch({ type: 'START_FETCH' });
     try {
       const response = await fetch(`https://reqres.in/api/users/${action.id}?delay=1`);
