@@ -4,7 +4,11 @@ export declare type AsyncActionHandlers<R extends Reducer<any, any>, AsyncAction
 }> = {
     [T in AsyncAction['type']]: AsyncAction extends infer A ? A extends {
         type: T;
-    } ? (dispatch: Dispatch<ReducerAction<R>>, getState: () => ReducerState<R>) => (a: A) => Promise<void> : never : never;
+    } ? (s: {
+        dispatch: Dispatch<ReducerAction<R>>;
+        getState: () => ReducerState<R>;
+        signal: AbortSignal;
+    }) => (a: A) => Promise<void> : never : never;
 };
 export declare function useReducerAsync<R extends Reducer<any, any>, I, AsyncAction extends {
     type: string;
@@ -15,12 +19,12 @@ export declare function useReducerAsync<R extends Reducer<any, any>, I, AsyncAct
  * import { useReducerAsync } from 'use-reducer-async';
  *
  * const asyncActionHandlers = {
- *   SLEEP: (dispatch, getState) => async (action) => {
+ *   SLEEP: ({ dispatch, getState, signal }) => async (action) => {
  *     dispatch({ type: 'START_SLEEP' });
  *     await new Promise(r => setTimeout(r, action.ms));
  *     dispatch({ type: 'END_SLEEP' });
  *   },
- *   FETCH: (dispatch, getState) => async (action) => {
+ *   FETCH: ({ dispatch, getState, signal }) => async (action) => {
  *     dispatch({ type: 'START_FETCH' });
  *     try {
  *       const response = await fetch(action.url);
