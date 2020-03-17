@@ -89,12 +89,12 @@ useReducer with async actions
 import { useReducerAsync } from 'use-reducer-async';
 
 const asyncActionHandlers = {
-  SLEEP: (dispatch, getState, abortSignal) => async (action) => {
+  SLEEP: ({ dispatch, getState, signal }) => async (action) => {
     dispatch({ type: 'START_SLEEP' });
     await new Promise(r => setTimeout(r, action.ms));
     dispatch({ type: 'END_SLEEP' });
   },
-  FETCH: (dispatch, getState, abortSignal) => async (action) => {
+  FETCH: ({ dispatch, getState, signal }) => async (action) => {
     dispatch({ type: 'START_FETCH' });
     try {
       const response = await fetch(action.url);
