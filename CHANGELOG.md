@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [2.0.1] - 2020-04-04
+### Changed
+- Avoid initializing AbortController repeatedly
+
 ## [2.0.0] - 2020-02-29
 ### Changed
 - Improve isClient detection for useIsomorphicLayoutEffect

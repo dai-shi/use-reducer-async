@@ -18,10 +18,13 @@ const isClient = (
 const useIsomorphicLayoutEffect = isClient ? useLayoutEffect : useEffect;
 
 const useAbortSignal = () => {
-  const abortController = useRef(new AbortController());
+  const abortController = useRef<AbortController>();
+  if (!abortController.current) {
+    abortController.current = new AbortController();
+  }
   useEffect(() => {
     const abort = () => {
-      abortController.current.abort();
+      (abortController.current as AbortController).abort();
     };
     return abort;
   }, []);
