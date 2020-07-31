@@ -1,8 +1,8 @@
 # use-reducer-async
 
-[![Build Status](https://travis-ci.com/dai-shi/use-reducer-async.svg?branch=master)](https://travis-ci.com/dai-shi/use-reducer-async)
-[![npm version](https://badge.fury.io/js/use-reducer-async.svg)](https://badge.fury.io/js/use-reducer-async)
-[![bundle size](https://badgen.net/bundlephobia/minzip/use-reducer-async)](https://bundlephobia.com/result?p=use-reducer-async)
+[![CI](https://img.shields.io/github/workflow/status/dai-shi/use-reducer-async/CI)](https://github.com/dai-shi/use-reducer-async/actions?query=workflow%3ACI)
+[![npm](https://img.shields.io/npm/v/use-reducer-async)](https://www.npmjs.com/package/use-reducer-async)
+[![size](https://img.shields.io/bundlephobia/minzip/use-reducer-async)](https://bundlephobia.com/result?p=use-reducer-async)
 
 React useReducer with async actions
 
