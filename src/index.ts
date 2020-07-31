@@ -124,11 +124,9 @@ export function useReducerAsync<
       getState: () => ReducerState<R>;
       signal: AbortSignal;
     }) => (a: typeof action) => Promise<void> : null);
-    if (aaHandler) {
-      aaHandler({ dispatch, getState, signal })(action as AsyncAction);
-    } else {
-      dispatch(action as ReducerAction<R>);
-    }
+    return aaHandler
+      ? aaHandler({ dispatch, getState, signal })(action as AsyncAction)
+      : dispatch(action as ReducerAction<R>);
   }, [aaHandlers, getState, signal]);
   return [state, wrappedDispatch];
 }
