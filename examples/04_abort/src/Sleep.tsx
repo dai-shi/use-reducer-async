@@ -22,7 +22,6 @@ const reducer: Reducer<State, Action> = (state, action) => {
   }
 };
 
-
 type AsyncAction = { type: 'SLEEP'; ms: number }
 
 const asyncActionHandlers: AsyncActionHandlers<Reducer<State, Action>, AsyncAction> = {
