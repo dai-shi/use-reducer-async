@@ -23,6 +23,9 @@ npm install use-reducer-async
 ## Usage
 
 ```javascript
+
+import { useReducerAsync } from "use-reducer-async";
+
 const initialState = {
   sleeping: false,
 };
