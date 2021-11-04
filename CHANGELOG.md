@@ -4,6 +4,7 @@
 
 ### Changed
 - Modern build
+- Fix package.json properly for ESM
 
 ## [2.0.1] - 2020-04-04
 ### Changed

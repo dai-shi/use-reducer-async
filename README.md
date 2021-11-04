@@ -60,13 +60,8 @@ const Component = () => {
 
 ### Notes for abortability
 
-If an async action handler dispatches an action after the component is unmounted,
-React in the development mode warns about possible memory leaks.
-
-It is the responsibility of the async action handler to deal with such cases.
-
 All async action handlers receive `signal` in the argument.
-Refer [`examples/04_abort/src`](./examples/04_abort/src) for the usage.
+Refer [`examples/04_abort/src`](./examples/04\_abort/src) for the usage.
 
 Note: The implementation depends on [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) in the DOM spec.
 If you are using an environment that doesn't have AbortController (for example IE11), you need a polyfill:
@@ -83,9 +78,9 @@ useReducer with async actions
 
 #### Parameters
 
--   `reducer` **R** 
--   `initialState` **ReducerState&lt;R>** 
--   `asyncActionHandlers` **AsyncActionHandlers&lt;R, AsyncAction>** 
+*   `reducer` **R** 
+*   `initialState` **ReducerState\<R>** 
+*   `asyncActionHandlers` **AsyncActionHandlers\<R, AsyncAction>** 
 
 #### Examples
 
@@ -112,7 +107,7 @@ const asyncActionHandlers = {
 const [state, dispatch] = useReducerAsync(reducer, initialState, asyncActionHandlers);
 ```
 
-Returns **\[ReducerState&lt;R>, Dispatch&lt;ExportAction>]** 
+Returns **\[ReducerState\<R>, Dispatch\<ExportAction>]** 
 
 ## Examples
 
@@ -126,7 +121,7 @@ PORT=8080 npm run examples:01_minimal
 and open <http://localhost:8080> in your web browser.
 
 You can also try them in codesandbox.io:
-[01](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/01_minimal)
-[02](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/02_typescript)
-[03](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/03_getstate)
-[04](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/04_abort)
+[01](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/01\_minimal)
+[02](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/02\_typescript)
+[03](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/03\_getstate)
+[04](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/04\_abort)
