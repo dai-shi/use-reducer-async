@@ -1,14 +1,6 @@
-import React, {
-  StrictMode,
-  Reducer,
-} from 'react';
+import React, { StrictMode, Reducer } from 'react';
 
-import {
-  render,
-  fireEvent,
-  cleanup,
-  waitForElement,
-} from '@testing-library/react';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 
 import { useReducerAsync, AsyncActionHandlers } from '../src/index';
 
@@ -62,11 +54,11 @@ describe('basic spec', () => {
         <Component />
       </StrictMode>
     );
-    const { getAllByText, container } = render(<App />);
+    const { getAllByText, findAllByText, container } = render(<App />);
     expect(container).toMatchSnapshot();
     fireEvent.click(getAllByText('Click')[0]);
     expect(container).toMatchSnapshot();
-    await waitForElement(() => getAllByText('Idle'));
+    await findAllByText('Idle');
     expect(container).toMatchSnapshot();
   });
 });

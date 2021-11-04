@@ -28,7 +28,10 @@
     "react/jsx-one-expression-per-line": "off",
     "import/extensions": ["error", "never"],
     "import/no-unresolved": ["error", { "ignore": ["use-reducer-async"] }],
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-use-before-define": "off",
+    "no-unused-vars": "off",
+    "no-redeclare": "off"
   },
   "overrides": [{
     "files": ["__tests__/**/*"],

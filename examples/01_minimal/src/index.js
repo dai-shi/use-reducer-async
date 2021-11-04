@@ -39,4 +39,4 @@ const App = () => (
   </StrictMode>
 );
 
-ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+ReactDOM.render(<App />, document.getElementById('app'));
