@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Changed
+- Modern build
+
 ## [2.0.1] - 2020-04-04
 ### Changed
 - Avoid initializing AbortController repeatedly

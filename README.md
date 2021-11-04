@@ -3,6 +3,7 @@
 [![CI](https://img.shields.io/github/workflow/status/dai-shi/use-reducer-async/CI)](https://github.com/dai-shi/use-reducer-async/actions?query=workflow%3ACI)
 [![npm](https://img.shields.io/npm/v/use-reducer-async)](https://www.npmjs.com/package/use-reducer-async)
 [![size](https://img.shields.io/bundlephobia/minzip/use-reducer-async)](https://bundlephobia.com/result?p=use-reducer-async)
+[![discord](https://img.shields.io/discord/627656437971288081)](https://discord.gg/MrQdmzd)
 
 React useReducer with async actions
 
