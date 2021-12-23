@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [2.1.0] - 2021-12-23
+### Changed
+- feat: support recursive dispatching async actions #26
+
 ## [2.0.2] - 2021-11-04
 ### Changed
 - Modern build
