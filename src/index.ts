@@ -38,7 +38,7 @@ export type AsyncActionHandlers<
   [T in AsyncAction['type']]: AsyncAction extends infer A ? A extends {
     type: T;
   } ? (s: {
-    dispatch: Dispatch<ReducerAction<R>>;
+    dispatch: Dispatch<AsyncAction | ReducerAction<R>>;
     getState: () => ReducerState<R>;
     signal: AbortSignal;
   }) => (a: A) => Promise<void> : never : never;
@@ -120,12 +120,12 @@ export function useReducerAsync<
     const aaHandler = (
       (type && aaHandlers[type]) || null
     ) as (typeof action extends AsyncAction ? (s: {
-      dispatch: Dispatch<ReducerAction<R>>;
+      dispatch: Dispatch<AsyncAction | ReducerAction<R>>;
       getState: () => ReducerState<R>;
       signal: AbortSignal;
     }) => (a: typeof action) => Promise<void> : null);
     if (aaHandler) {
-      aaHandler({ dispatch, getState, signal })(action as AsyncAction);
+      aaHandler({ dispatch: wrappedDispatch, getState, signal })(action as AsyncAction);
     } else {
       dispatch(action as ReducerAction<R>);
     }
