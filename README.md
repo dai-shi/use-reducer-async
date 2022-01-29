@@ -13,7 +13,7 @@ React useReducer doesn't support async actions natively.
 Unlike Redux, there's no middleware interface, but hooks are composable.
 
 This is a tiny library to extend useReducer's dispatch
-so that dispathing async actions invoke async functions.
+so that dispatching async actions invoke async functions.
 
 ## Install
 
