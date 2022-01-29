@@ -121,7 +121,7 @@ PORT=8080 npm run examples:01_minimal
 and open <http://localhost:8080> in your web browser.
 
 You can also try them in codesandbox.io:
-[01](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/01\_minimal)
-[02](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/02\_typescript)
-[03](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/03\_getstate)
-[04](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/master/examples/04\_abort)
+[01](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/main/examples/01\_minimal)
+[02](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/main/examples/02\_typescript)
+[03](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/main/examples/03\_getstate)
+[04](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/main/examples/04\_abort)
