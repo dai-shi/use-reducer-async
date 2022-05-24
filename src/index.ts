@@ -4,6 +4,7 @@ import {
   useLayoutEffect,
   useReducer,
   useRef,
+  useState,
   Dispatch,
   Reducer,
   ReducerState,
@@ -18,17 +19,17 @@ const isClient = (
 const useIsomorphicLayoutEffect = isClient ? useLayoutEffect : useEffect;
 
 const useAbortSignal = () => {
-  const abortController = useRef<AbortController>();
-  if (!abortController.current) {
-    abortController.current = new AbortController();
-  }
+  const [controller, setController] = useState(() => new AbortController());
+  const lastController = useRef(controller);
   useEffect(() => {
     const abort = () => {
-      (abortController.current as AbortController).abort();
+      lastController.current.abort();
+      lastController.current = new AbortController();
+      setController(lastController.current);
     };
     return abort;
   }, []);
-  return abortController.current.signal;
+  return controller.signal;
 };
 
 export type AsyncActionHandlers<
