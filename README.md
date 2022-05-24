@@ -125,3 +125,7 @@ You can also try them in codesandbox.io:
 [02](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/main/examples/02\_typescript)
 [03](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/main/examples/03\_getstate)
 [04](https://codesandbox.io/s/github/dai-shi/use-reducer-async/tree/main/examples/04\_abort)
+
+## Blogs
+
+*   [How to Handle Async Actions for Global State With React Hooks and Context](https://blog.axlight.com/posts/how-to-handle-async-actions-for-global-state-with-react-hooks-and-context/)
