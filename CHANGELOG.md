@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+
+## [2.1.1] - 2022-05-24
 ### Changed
 - fix build for UMD
 - fix: useAbortSignal to work with React 18 #35
