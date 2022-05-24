@@ -58,7 +58,7 @@ describe('basic spec', () => {
     );
     const { getAllByText, findAllByText, container } = render(<App />);
     expect(container).toMatchSnapshot();
-    fireEvent.click(getAllByText('Click')[0]);
+    fireEvent.click(getAllByText('Click')[0] as Element);
     expect(container).toMatchSnapshot();
     await findAllByText('Idle');
     expect(container).toMatchSnapshot();
