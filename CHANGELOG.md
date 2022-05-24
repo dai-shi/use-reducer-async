@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Changed
 - fix build for UMD
+- fix: useAbortSignal to work with React 18 #35
 
 ## [2.1.0] - 2021-12-23
 ### Changed
