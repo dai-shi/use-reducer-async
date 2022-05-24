@@ -26,7 +26,7 @@
     "dist"
   ],
   "scripts": {
-    "compile": "microbundle build -f modern,umd",
+    "compile": "microbundle build -f modern,umd --globals react=React",
     "postcompile": "cp dist/index.modern.js dist/index.modern.mjs && cp dist/index.modern.js.map dist/index.modern.mjs.map",
     "test": "run-s eslint tsc-test jest",
     "eslint": "eslint --ext .js,.ts,.tsx --ignore-pattern dist .",

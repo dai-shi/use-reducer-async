@@ -1,6 +1,8 @@
 # Change Log
 
 ## [Unreleased]
+### Changed
+- fix build for UMD
 
 ## [2.1.0] - 2021-12-23
 ### Changed
