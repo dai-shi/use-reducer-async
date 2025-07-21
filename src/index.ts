@@ -8,8 +8,9 @@ import {
   Dispatch,
   Reducer,
   ReducerState,
-  ReducerAction,
 } from 'react';
+
+type ReducerAction<R extends Reducer<any, any>> = R extends Reducer<any, infer A> ? A : never;
 
 const isClient = (
   typeof window !== 'undefined'
