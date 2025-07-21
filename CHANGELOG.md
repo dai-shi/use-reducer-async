@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [2.1.2] - 2025-07-21
+### Changed
+- Do not import ReducerAction type #47
+
 ## [2.1.1] - 2022-05-24
 ### Changed
 - fix build for UMD
